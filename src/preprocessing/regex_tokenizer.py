@@ -1,8 +1,9 @@
 import re
 from typing import List
-from core.interfaces import Tokenizer
+from src.core.interfaces import Tokenizer
 
-class SimpleTokenizer(Tokenizer):
+
+class RegexTokenizer(Tokenizer):
     def __init__(self, partten: str = r'\w+|[^\w\s]'):
         super().__init__()
         self.partten = partten

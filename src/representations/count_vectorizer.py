@@ -18,7 +18,10 @@ class CountVectorizer(Vectorizer):
         self.vocabulary_ = {token: idx for idx, token in enumerate(sorted(vocab_set))}
 
     def transform(self, documents: List[str]) -> List[List[int]]:
-   
+        
+        if not self.vocabulary_:
+            raise ValueError("Vocabulary is empty. Please fit the vectorizer first.")
+
         vectors = []
         for doc in documents:
             tokens = self.tokenizer.tokenize(doc)

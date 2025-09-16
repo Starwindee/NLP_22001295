@@ -1,6 +1,6 @@
 import re
 from typing import List
-from core.interfaces import Tokenizer
+from src.core.interfaces import Tokenizer
 
 class SimpleTokenizer(Tokenizer):
     def __init__(self):
