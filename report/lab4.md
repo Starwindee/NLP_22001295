@@ -1,30 +1,42 @@
 # Report - Lab 4: Word Embeddings
 
-1. Task 1 + 2: Tải và sử dụng model có sẵn (gensim), và nhúng câu/ văn bản
-   1.1. Giải thích các bước thực hiện
+## 1. Task 1 + 2: Tải và sử dụng model có sẵn (gensim), và nhúng câu/văn bản
 
-- Bước 1: Cài đặt thư viện gensim:
-  `bash pip install gensim`
-- Bước 2: Triển khai class WordEmbedder
-  - Tạo file `src/representations/word_embedder.py`
-  - Sử dụng `gensim.downloader` để tải pretrained model
-  - Triển khai các phương thức chính:
-    - 'get_vector': Lấy vector từ một từ
-    - 'get_similarity': Tính độ tương đồng cosine giữa hai từ
-    - 'most_similarity()': Tìm top-n từ đồng nghĩa
-    - 'embed_document()': Nhúng một câu/ văn bản thành vector trung bình của các từ. Trong đó bước đầu tiên là tokenize câu thành các từ, sau đó lấy vector từng từ và tính trung bình.
-- Bước 3: Test class WordEmbedder + Tạo file `test/lab4_test.py` + Viết các test case để kiểm tra các phương thức 'get\*vector', 'get_similarity', 'most_similarity()', với:
+### 1.1. Giải thích các bước thực hiện
 
-  - pretrained model: 'glove-wiki-gigaword-50'
-    _ lấy vector 1 từ: 'king'
-    _ tính độ tương đồng giữa 2 từ: 'king' và 'queen'
-    \_ tìm top-10 từ đồng nghĩa với 'computer' \* nhúng câu mẫu: "The cat is sleeping peacefully on the sunny windowsill."
+**Bước 1: Cài đặt thư viện gensim**
 
-    1.2. Kết quả thực nghiệm
+```bash
+pip install gensim
+```
 
-- Kết quả lấy vector từ 'king':
+**Bước 2: Triển khai class WordEmbedder**
 
-````python
+- Tạo file `src/representations/word_embedder.py`
+- Sử dụng `gensim.downloader` để tải pretrained model
+- Triển khai các phương thức chính:
+  - `get_vector()`: Lấy vector từ một từ
+  - `get_similarity()`: Tính độ tương đồng cosine giữa hai từ
+  - `most_similar()`: Tìm top-n từ đồng nghĩa
+  - `embed_document()`: Nhúng một câu/văn bản thành vector trung bình của các từ
+    - Bước đầu tiên: Tokenize câu thành các từ
+    - Sau đó lấy vector từng từ và tính trung bình
+
+**Bước 3: Test class WordEmbedder**
+
+- Tạo file `test/lab4_test.py`
+- Viết các test case để kiểm tra các phương thức `get_vector()`, `get_similarity()`, `most_similar()`, với:
+  - Pretrained model: `glove-wiki-gigaword-50`
+  - Lấy vector 1 từ: `king`
+  - Tính độ tương đồng giữa 2 từ: `king` và `queen`; `king` và `man`
+  - Tìm top-10 từ đồng nghĩa với `computer`
+  - Nhúng câu mẫu: "The cat is sleeping peacefully on the sunny windowsill."
+
+### 1.2. Kết quả thực nghiệm
+
+**Kết quả lấy vector từ 'king':**
+
+```python
 Vector for 'king':
 [-0.32307  -0.87616   0.21977   0.25268   0.22976   0.7388   -0.37954
  -0.35307  -0.84369  -1.1113   -0.30266   0.33178  -0.25113   0.30448
@@ -43,32 +55,41 @@ Vector for 'king':
   0.16483  -0.98878 ]
 ```
 
-- Kết quả tính độ tương đồng giữa 'king' và 'queen':
+**Kết quả tính độ tương đồng giữa 'king' và 'queen':**
 
-``` python
+```python
 Similarity between 'king' and 'queen': 0.7507691
 ```
 
-    + Nhận xét: Độ tương đồng cao (gần 1) cho thấy 'king' và 'queen' có ngữ nghĩa liên quan chặt chẽ (có thể là quan hệ ngữ nghĩa về royalty), phù hợp với thực tế.
+- **Nhận xét:** Độ tương đồng cao (gần 1) cho thấy `king` và `queen` có ngữ nghĩa liên quan chặt chẽ (có thể là quan hệ ngữ nghĩa về royalty), phù hợp với thực tế.
 
-``` python
+```python
 Similarity between 'king' and 'man': 0.5118681
 ```
 
-    + Nhận xét: Độ tương đồng trung bình (khoảng 0.5) cho thấy 'king' và 'man' có liên hệ ngữ nghĩa (đều chỉ giới tính nam hoặc vai trò nam giới), nhưng ít liên quan hơn so với cặp 'king' – 'queen',
+- **Nhận xét:** Độ tương đồng trung bình (khoảng 0.5) cho thấy `king` và `man` có liên hệ ngữ nghĩa (đều chỉ giới tính nam hoặc vai trò nam giới), nhưng ít liên quan hơn so với cặp `king` – `queen`.
 
-- Kết quả tìm top-10 từ đồng nghĩa với 'computer':
+**Kết quả tìm top-10 từ đồng nghĩa với 'computer':**
 
-``` python
+```python
 Most similar words to 'computer':
-[('computers', 0.8751984238624573), ('software', 0.8373122215270996), ('technology', 0.7642159461975098), ('pc', 0.7366448640823364), ('hardware', 0.7290390729904175), ('internet', 0.7286775708198547), ('desktop', 0.7234441637992859), ('electronic', 0.7221828699111938), ('systems', 0.7197922468185425), ('computing', 0.7141730785369873)]
+[('computers', 0.8751984238624573),
+ ('software', 0.8373122215270996),
+ ('technology', 0.7642159461975098),
+ ('pc', 0.7366448640823364),
+ ('hardware', 0.7290390729904175),
+ ('internet', 0.7286775708198547),
+ ('desktop', 0.7234441637992859),
+ ('electronic', 0.7221828699111938),
+ ('systems', 0.7197922468185425),
+ ('computing', 0.7141730785369873)]
 ```
 
-    + Nhận xét: Các từ đồng nghĩa như 'computers', 'software', 'technology' đều liên quan đến lĩnh vực máy tính - công nghệ, cho thấy model đã học được các mối quan hệ ngữ nghĩa tốt.
+- **Nhận xét:** Các từ đồng nghĩa như `computers`, `software`, `technology` đều liên quan đến lĩnh vực máy tính - công nghệ, cho thấy model đã học được các mối quan hệ ngữ nghĩa tốt.
 
-- Kết quả nhúng câu mẫu:
+**Kết quả nhúng câu mẫu:**
 
-``` python
+```python
 Document embedding for sentence:
 [-1.70427799e-01  6.63375929e-02  5.12149990e-01 -7.62629956e-02
  -8.57415944e-02  3.90449971e-01 -1.14693180e-01  3.94869983e-01
@@ -95,27 +116,42 @@ Document embedding for sentence:
  -1.33834496e-01 -1.31722599e-01  1.30415084e-02 -1.97637796e-01
   1.51704894e-02  4.91348803e-01 -4.83259439e-01  1.49025887e-01
  -3.46081406e-01 -1.21453404e-01  5.29408932e-01  1.01277888e-01]
- ```
+```
 
+---
 
-2. Task 3: Tự train word2vec model trên corpus nhỏ (Gensim)
-2.1. Giải thích các bước thực hiện
-- Bước 1: Tạo file `test/lab4_embedder_trainning_demo.py` để demo việc train word2vec model
-- Bước 2: Chuẩn bị corpus nhỏ
-    + Sử dụng file "\UD_English-EWT\en_ewt-ud-train.txt" lấy từ lab 1
-    _ Viết hàm 'read_sentences' để đọc file và yield từng câu đã tokenized
-- Bước 3: Train word2vec model
-    + Sử dụng `gensim.models.Word2Vec` để train model trên tập dữ liệu
-    + Thiết lập các tham số như vector_size=100, window=5, min_count=2, workers=4, epochs=10
-    + Lưu model đã train vào file "results/word2vec_ewt.model"
-- Bước 4: Test model đã train
-    + Test tìm 5 từ đồng nghĩa với từ 'dog'
-    + Giải bài toán quan hệ từ 'king' - 'man' + 'woman' = ?
+## 2. Task 3: Tự train word2vec model trên corpus nhỏ (Gensim)
 
-2.2. Kết quả thực nghiệm
-- Kết quả tìm 5 từ đồng nghĩa với 'dog':
+### 2.1. Giải thích các bước thực hiện
 
-``` python
+**Bước 1:** Tạo file `test/lab4_embedder_training_demo.py` để demo việc train word2vec model
+
+**Bước 2: Chuẩn bị corpus nhỏ**
+
+- Sử dụng file `UD_English-EWT/en_ewt-ud-train.txt` lấy từ lab 1
+- Viết hàm `read_sentences()` để đọc file và yield từng câu đã tokenized
+
+**Bước 3: Train word2vec model**
+
+- Sử dụng `gensim.models.Word2Vec` để train model trên tập dữ liệu
+- Thiết lập các tham số:
+  - `vector_size=100`
+  - `window=5`
+  - `min_count=2`
+  - `workers=4`
+  - `epochs=10`
+- Lưu model đã train vào file `results/word2vec_ewt.model`
+
+**Bước 4: Test model đã train**
+
+- Test tìm 5 từ đồng nghĩa với từ `dog`
+- Giải bài toán quan hệ từ: `king` - `man` + `woman` = ?
+
+### 2.2. Kết quả thực nghiệm
+
+**Kết quả tìm 5 từ đồng nghĩa với 'dog':**
+
+```python
 Top 5 words similar to 'dog':
   car: 0.9961
   walk: 0.9953
@@ -124,40 +160,58 @@ Top 5 words similar to 'dog':
   move: 0.9948
 ```
 
-    + Nhận xét: Các từ đồng nghĩa như 'car', 'walk', 'house' đều không thực sự đồng nghĩa với 'dog' về mặt ngữ nghĩa. Điều này có thể do corpus nhỏ và không đủ đa dạng để học được các mối quan hệ ngữ nghĩa chính xác.
+- **Nhận xét:** Các từ đồng nghĩa như `car`, `walk`, `house` đều không thực sự đồng nghĩa với `dog` về mặt ngữ nghĩa. Điều này có thể do corpus nhỏ và không đủ đa dạng để học được các mối quan hệ ngữ nghĩa chính xác.
 
-- Kết quả giải bài toán quan hệ từ:
+**Kết quả giải bài toán quan hệ từ:**
 
-``` python
+```python
 Analogy example (king - man + woman): ('job', 0.991863489151001)
 ```
 
-    + Nhận xét: Kết quả trả về là 'job' với độ tương đồng cao 0.9918, nhưng 'job' không liên quan rõ ràng đến quan hệ giữa 'king', 'man', và 'woman'. Điều này cho thấy model chưa học được các mối quan hệ ngữ nghĩa phức tạp do corpus hạn chế (vocab = 11290 từ)
+- **Nhận xét:** Kết quả trả về là `job` với độ tương đồng cao 0.9918, nhưng `job` không liên quan rõ ràng đến quan hệ giữa `king`, `man`, và `woman`. Điều này cho thấy model chưa học được các mối quan hệ ngữ nghĩa phức tạp do corpus hạn chế (vocab = 11,290 từ).
 
-3. Advance Task - Task 4: Huấn luyện model trên tập dữ liệu lớn (Spark)
-3.1. Giải thích các bước thực hiện
-- Bước 1: Cài đặt Apache Spark và PySpark
-    + Tải và cài đặt Apache Spark từ trang chủ
-    + Cài đặt PySpark qua pip: `pip install pyspark`
-- Bước 2: Tạo file `test/lab4_spark_word2vec_demo.py` để demo việc train word2vec model sử dụng Spark
-- Bước 3: Chuẩn bị tập dữ liệu lớn: sử dụng tập dữ liệu 'c4-train.00000-of-01024-30K.json'
-- Bước 4: Triển khai:
-    + Khởi tạo SparkSession
-    + Đọc và tiền xử lý dữ liệu:
-        * Đọc file JSON vào DataFrame
-        * Lấy cột 'text' và tokenize thành các câu
-        * Tiền xử lý: chuyển về chữ thường, loại bỏ ký tự đặc biệt, tách token theo khoảng trắng
-    + Huấn luyện Word2Vec model:
-        * Sử dụng `pyspark.ml.feature.Word2Vec` để huấn luyện model trên tập dữ liệu đã tokenized
-        * Thiết lập các tham số: vectorSize=100, min_count=5.
-    + Lưu model đã huấn luyện vào thư mục "results/spark_word2vec_model"
-- Bước 5: Test model đã huấn luyện
-    + Tìm 5 từ đồng nghĩa với từ 'computer':
+---
 
-3.2. Kết quả thực nghiệm
-- Kết quả tìm 5 từ đồng nghĩa với 'computer':
+## 3. Advance Task - Task 4: Huấn luyện model trên tập dữ liệu lớn (Spark)
 
-``` python
+### 3.1. Giải thích các bước thực hiện
+
+**Bước 1: Cài đặt Apache Spark và PySpark**
+
+- Tải và cài đặt Apache Spark từ trang chủ
+- Cài đặt PySpark qua pip:
+
+```bash
+pip install pyspark
+```
+
+**Bước 2:** Tạo file `test/lab4_spark_word2vec_demo.py` để demo việc train word2vec model sử dụng Spark
+
+**Bước 3:** Chuẩn bị tập dữ liệu lớn: sử dụng tập dữ liệu `c4-train.00000-of-01024-30K.json`
+
+**Bước 4: Triển khai**
+
+- Khởi tạo SparkSession
+- Đọc và tiền xử lý dữ liệu:
+  - Đọc file JSON vào DataFrame
+  - Lấy cột `text` và tokenize thành các câu
+  - Tiền xử lý: chuyển về chữ thường, loại bỏ ký tự đặc biệt, tách token theo khoảng trắng
+- Huấn luyện Word2Vec model:
+  - Sử dụng `pyspark.ml.feature.Word2Vec` để huấn luyện model trên tập dữ liệu đã tokenized
+  - Thiết lập các tham số:
+    - `vectorSize=100`
+    - `minCount=5`
+- Lưu model đã huấn luyện vào thư mục `results/spark_word2vec_model`
+
+**Bước 5: Test model đã huấn luyện**
+
+- Tìm 5 từ đồng nghĩa với từ `computer`
+
+### 3.2. Kết quả thực nghiệm
+
+**Kết quả tìm 5 từ đồng nghĩa với 'computer':**
+
+```python
 Finding synonyms for 'computer':
 +---------+------------------+
 |word     |similarity        |
@@ -170,38 +224,60 @@ Finding synonyms for 'computer':
 +---------+------------------+
 ```
 
-    + Nhận xét: Các từ đồng nghĩa như 'desktop', 'computers', 'device', và 'laptop' đều liên quan chặt chẽ đến 'computer', cho thấy model đã học được các mối quan hệ ngữ nghĩa tốt từ tập dữ liệu lớn.
+- **Nhận xét:** Các từ đồng nghĩa như `desktop`, `computers`, `device`, và `laptop` đều liên quan chặt chẽ đến `computer`, cho thấy model đã học được các mối quan hệ ngữ nghĩa tốt từ tập dữ liệu lớn.
 
+---
 
-4. Task 5 Trực quan hóa Embeddings
-4.1. Giải thích các bước thực hiện
-- Bước 1: Tạo notebook `notebooks/lab4_visualize_embeddings.ipynb`
-- Bước 2: Tải Glove embeddings (50 chiều): 'glove.6B.50d.txt'
-- Bước 3: Chuyển embeddings sang DataFrame
-    + Đọc file glove và chuyển sang DataFrame với các cột 'word' và 'vector' (dạng list)
-- Bước 4: Sử dụng PCA để giảm chiều từ 50 xuống 2
-    + Sử dụng `sklearn.decomposition.PCA` để giảm chiều vector
-- Bước 5: Trực quan hóa với matplotlib
-    + Vẽ scatter plot các từ trên mặt phẳng 2D
-    + Gắn nhãn các từ để dễ nhận diện
-4.2. Kết quả trực quan hóa embeddings nằm trong notebook `notebooks/lab4_visualize
-4.3. Hướng dẫn chạy notebook
-- Cài đặt các thư viện cần thiết:
+## 4. Task 5: Trực quan hóa Embeddings
+
+### 4.1. Giải thích các bước thực hiện
+
+**Bước 1:** Tạo notebook `notebook/lab4_visualize.ipynb`
+
+**Bước 2:** Tải GloVe embeddings (50 chiều): `glove.6B.50d.txt`
+
+**Bước 3: Chuyển embeddings sang DataFrame**
+
+- Đọc file GloVe và chuyển sang DataFrame với các cột `word` và `vector` (dạng list)
+
+**Bước 4: Sử dụng PCA để giảm chiều từ 50 xuống 2**
+
+- Sử dụng `sklearn.decomposition.PCA` để giảm chiều vector
+
+**Bước 5: Trực quan hóa với matplotlib**
+
+- Vẽ scatter plot các từ trên mặt phẳng 2D
+- Gắn nhãn các từ để dễ nhận diện
+
+### 4.2. Kết quả trực quan hóa
+
+Kết quả trực quan hóa embeddings nằm trong notebook `notebook/lab4_visualize.ipynb`
+
+### 4.3. Hướng dẫn chạy notebook
+
+**Cài đặt các thư viện cần thiết:**
 
 ```bash
 pip install pandas numpy matplotlib scikit-learn
 ```
 
-- Thay đổi đường dẫn `glove_file` trong notebook thành đường dẫn tới file 'glove.6B.50d.txt' trên máy bạn
-- Chạy từng cell trong notebook để thực hiện các bước từ tải dữ liệu, xử lý, giảm chiều, và trực quan hóa.
+**Các bước chạy:**
 
-5. Một số vấn đề gặp phải
-- Load toàn bộ GloVe file (6GB) vào RAM:
-    + Giải pháp: Chỉ load một phần (ví dụ 20000 từ phổ biến nhất để demo)
+1. Thay đổi đường dẫn `glove_file` trong notebook thành đường dẫn tới file `glove.6B.50d.txt` trên máy bạn
+2. Chạy từng cell trong notebook để thực hiện các bước từ tải dữ liệu, xử lý, giảm chiều, và trực quan hóa
 
+---
 
-6. Tài liệu tham khảo
+## 5. Một số vấn đề gặp phải
+
+**Vấn đề:** Load toàn bộ GloVe file (6GB) vào RAM
+
+**Giải pháp:** Chỉ load một phần (ví dụ 20,000 từ phổ biến nhất để demo)
+
+---
+
+## 6. Tài liệu tham khảo
+
 - Gensim Documentation: https://radimrehurek.com/gensim/
 - PySpark Documentation: https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.feature.Word2Vec.html
-- GloVe downloader: https://nlp.stanford.edu/projects/glove/
-````
+- GloVe Embeddings: https://nlp.stanford.edu/projects/glove/
