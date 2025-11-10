@@ -46,15 +46,3 @@ class WordEmbedder:
         return np.mean(vectors, axis=0)
     
     
-        
-if __name__ == "__main__":
-    embedder = WordEmbedder("glove-wiki-gigaword-50")
-
-    print("Vector for 'king':")
-    print(embedder.get_vector("king"))
-
-    print("Similarity between 'king' and 'queen':")
-    print(embedder.get_similarity("king", "queen"))
-
-    print("Most similar words to 'king':")
-    print(embedder.most_similarity("king"))
