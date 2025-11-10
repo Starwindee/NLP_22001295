@@ -14,16 +14,11 @@ NLP_22001295_HUS/
 │   ├── c4-train.00000-of-01024-30K.json
 │   └── ...
 │
-├── external_data/
-│   ├── glove.6B.50d.txt/
-│   │   └── glove.6B.50d.txt
-│   └── ...
-│
 ├── src/
 │    ├── core/
 │    ├── preprocessing/
 │    ├── representations/
-│       ├── counr_vectorizer.py
+│       ├── count_vectorizer.py
 │       ├── word_embedder.py
 │       └── ...
 │
