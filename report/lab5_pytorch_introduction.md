@@ -1,6 +1,7 @@
 # Report Lab 5: PyTorch Introduction
 
 **Ngày:** 17/11/2025
+**Notebook:** [lab5_pytorch_introduction.ipynb](../notebook/lab5_pytorch_introduction.ipynb)
 
 ## 1. Phần 1: Khám phá Tensor
 
@@ -15,7 +16,7 @@
 1. **Tạo tensor từ Python list:**
 
    - Sử dụng `torch.tensor(data)` để chuyển đổi list Python thành tensor
-   - Ví dụ: `data = [[1, 2], [3, 4]]` → tensor 2x2
+   - Ví dụ: `data = [[1, 2], [3, 4]]` -> tensor 2x2
 
 2. **Tạo tensor từ NumPy array:**
 
