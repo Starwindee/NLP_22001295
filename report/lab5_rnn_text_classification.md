@@ -2,6 +2,8 @@
 
 **Ngày:** 17/11/2025
 
+**Notebook:** [../notebook/lab5_rnn_text_classification.ipynb]
+
 ---
 
 ## 1. Giới thiệu

@@ -2,6 +2,8 @@
 
 **Ngày:** 17/11/2025
 
+**Notebook:** [../notebook/lab5_rnn_for_pos_tagging.ipynb]
+
 ---
 
 ## 1. Giới thiệu

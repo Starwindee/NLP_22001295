@@ -1,7 +1,8 @@
 # Report Lab 5: PyTorch Introduction
 
 **Ngày:** 17/11/2025
-**Notebook:** [lab5_pytorch_introduction.ipynb](../notebook/lab5_pytorch_introduction.ipynb)
+
+**Notebook:** [../notebook/lab5_pytorch_introduction.ipynb]
 
 ## 1. Phần 1: Khám phá Tensor
 
