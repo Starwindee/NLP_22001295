@@ -1,7 +1,5 @@
 # Báo Cáo Lab 5: Xây Dựng Mô Hình RNN cho Nhận Dạng Thực Thể Tên (NER)
 
-**Ngày thực hiện:** [Ngày]
-
 ---
 
 ### Task 1: Tải và Tiền Xử Lý Dữ Liệu
