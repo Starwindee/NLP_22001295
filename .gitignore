@@ -18,6 +18,12 @@ __pycache__/
 *.xlsx
 *.json
 
+
+# Data files - Ignore all data
+data/
+!data/data_descriptions.md
+
+
 # Logs
 *.log
 
