@@ -1,46 +1,46 @@
-# NLP_22001295_HUS
+# Natural Language Processing - Course Projects
 
-- Họ tên: Hoàng Thị Thanh Tuyền
-- MSV: 22001295
+**Họ tên:** Hoàng Thị Thanh Tuyền  
+**MSSV:** 22001295
 
-## Project Structure
+## Giới thiệu
+
+Repository này chứa các bài tập thực hành môn Xử lý Ngôn ngữ Tự nhiên và Học sâu.
+
+## Cấu trúc thư mục
 
 ```
 NLP_22001295_HUS/
+├── data/                          # Dữ liệu
+│   └── data_descriptions.md       # Mô tả các dataset
 │
-├── data/
-│   ├── UD_English-EWT/
-│   │   └── en_ewt-ud-train.txt
-│   ├── c4-train.00000-of-01024-30K.json
+├── notebook/                      # Jupyter Notebooks thực hành
+│   ├── lab4_visualize.ipynb
+│   ├── lab5_rnn_text_classification.ipynb
+│   ├── lab6_intro_transformers.ipynb
 │   └── ...
 │
-├── src/
-│    ├── core/
-│    ├── preprocessing/
-│    ├── representations/
-│       ├── count_vectorizer.py
-│       ├── word_embedder.py
-│       └── ...
+├── report/                        # Báo cáo chi tiết từng lab
+│   ├── lab1_2.md
+│   ├── lab4.md
+│   ├── lab5_rnn_text_classification.md
+│   ├── lab6_intro_transformers.md
+│   └── ...
+│
+├── src/                           # Source code
+│   ├── core/                      # Interfaces và dataset loaders
+│   ├── preprocessing/             # Tokenizers
+│   ├── representations/           # Vectorizers, embeddings
+│   └── models/                    # Text classifiers
 │
 ├── test/
 │   ├── lab2.py
 │   ├── lab4_test.py
-│   ├── lab4_embedder_training_demo.py
-│   ├── lab4_spark_word2vec_demo.py
+│   ├── lab5_test.py
 │   └── ...
 │
-├── notebook/
-│   ├── lab4_visualize.ipynb
-│   └── ...
-│
-├── results/
-│   ├── word2vec_ewt.model
-│   └── ...
-│
-├── report/
-│   ├── lab12.md
-│   ├── lab4.md
-│   └── ...
+├── results/                       # Kết quả và models
+│   └── word2vec_ewt.model
 │
 ├── requirements.txt
 └── README.md
