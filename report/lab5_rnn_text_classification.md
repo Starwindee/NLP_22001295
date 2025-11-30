@@ -174,7 +174,7 @@ Lab này tập trung vào bài toán **Intent Detection** - phát hiện ý đ�
 
 **Kết quả:**
 
-- **Test Accuracy:** 0.8643 (88.10%)
+- **Test Accuracy:** 0.8643 
 - **Test Loss:** 0.4986
 
 **Nhận xét:**
